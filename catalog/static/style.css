@@ -1,0 +1,28 @@
+body {
+    overflow-y: overlay;
+    background-color: #fbfbfb;
+}
+.navbar {
+    background-color: #d4f3ff;
+}
+.book-cover{
+    max-width: 160px;
+    max-height: 240px;
+}
+.category-book-cover {
+    max-width: 136px;
+    max-height: 204px;
+}
+.profile-pic {
+    max-width: 32px;
+    max-height: 32px;
+    border-radius: 50%;
+}
+.category-icon {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+h4,h3,h2 {
+    color: #004f9e
+}

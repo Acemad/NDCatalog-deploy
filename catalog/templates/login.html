@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block header %}
+<h2>Login</h2>
+{% endblock %}
+{% block navLogin %} active {% endblock %}
+{% block content %}
+<div class="g-signin2" data-onsuccess="onSignIn" data-width="240" data-height="50" data-longtitle="true">
+</div>
+<script>
+function onSignIn(googleUser) {
+    // get the identification token
+    var id_token = googleUser.getAuthResponse().id_token;
+    if (id_token) {
+        // send the id_token to the backend using ajax
+        $.ajax({
+            type: 'POST',
+            url: '/gconnect?state={{state}}',
+            contentType: 'application/octet-stream; charset=utf-8',
+            data: id_token,
+            processData: false,
+            success: function(result) {
+                if (result) {
+                    // on success return home
+                    window.location.replace("/");
+                    // disconnect user to prevent auto reconnects
+                    googleUser.disconnect();
+                }
+            }
+        })
+    }
+}
+</script>
+{% endblock %}

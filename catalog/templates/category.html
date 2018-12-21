@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}{{category.name}} Books{% endblock %}
+{% block header %}
+<h2>{{category.name}} Books</h2>
+<span class="small"><a href="{{url_for('home')}}"><- Back to Categories</a></span>
+{% endblock %}
+{% block content %}
+<div class="row">
+    {% if books %}
+    {% for book in books %} 
+    <div class="col-sm-6 col-lg-4">
+    <div class="media mb-3">
+        <a href="{{url_for('viewBook', category_slug=category.slug, title_slug=book.slug)}}">
+            <img class="category-book-cover mr-3" {% if book.cover_url %} src="{{book.cover_url}}"  {% else %} src="{{url_for('static', filename='book-md.png')}}" {% endif %}>
+        </a>
+        <div class="media-body align-self-start">
+            <h5>
+               <a href="{{url_for('viewBook', category_slug=category.slug, title_slug=book.slug)}}">{{ book.title }}</a> 
+            </h5>
+            <div>{{book.publish_year}}</div>              
+            {% if user_session['user_id'] == book.user_id %}
+            <div class="mb-0">
+                <img class="" src="{{url_for('static', filename='check.svg')}}">
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="col">
+        <div class="alert alert-info">
+            <h4 class="alert-heading">No Books Available Yet</h4>
+            <p>You can log-in and add books to this category.</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

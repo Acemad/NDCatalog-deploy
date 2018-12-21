@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block header %}
+<h2>All Categories</h2>
+{% endblock %}
+{% block navHome %} active {% endblock %}
+{% block content %}
+<div class="row">
+    {% if categories %}
+    {% for category in categories %}
+    <div class="col-sm-6 col-lg-4">
+    <div class="media mb-5">
+        <a href="{{url_for('showCategory', category_slug=category.slug)}}">
+            {% if category.icon_url %}
+            <img class="mr-3 category-icon" src="{{category.icon_url}}">
+            {% else %}
+            <img class="mr-3 category-icon" src="{{url_for('static', filename='tech.png')}}">
+            {% endif %}
+        </a>
+        <div class="align-self-center media-body">
+            <h4>
+                <a href="{{url_for('showCategory', category_slug=category.slug)}}">{{ category.name }}</a>
+            </h4>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

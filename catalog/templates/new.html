@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}Add a New Book{% endblock %}
+{% block header %}
+<h2>Adding a New Book</h2>
+{% endblock %}
+{% block navAdd %} active {% endblock %}
+{% block content %}
+<form action="{{url_for('newBook')}}" method="post">
+    <div class="form-group row">
+        <label for="category" class="col-sm-2 col-form-label">Category</label>
+        <div class="col-sm-4">
+            {% if categories %}
+            <select class="form-control" name="category">
+                {% for category in categories %}
+                <option>{{category.name}}</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-6">
+            <input class="form-control" type="text" name="title" placeholder="Book Title" required>
+        </div>
+    </div>
+    <div class="form-group row">
+            <label for="authorFName" class="col-sm-2 col-form-label">Author First Name</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" name="authorFName" placeholder="First Name">
+            </div>
+    </div>
+    <div class="form-group row">
+            <label for="authorLName" class="col-sm-2 col-form-label">Author Last Name</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" name="authorLName" placeholder="Last Name">
+            </div>
+    </div>
+    <div class="form-group row">
+            <label for="year" class="col-sm-2 col-form-label">Year Published</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="number" name="year" placeholder="2018" min="1900" max="2100">
+            </div>
+    </div>
+    <div class="form-group row">
+            <label for="link" class="col-sm-2 col-form-label">Link</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" name="link">
+            </div>
+    </div>
+    <div class="form-group row">
+            <label for="coverUrl" class="col-sm-2 col-form-label">Cover URL</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" name="coverUrl">
+            </div>
+    </div>
+    <div class="form-group row">
+            <label for="summary" class="col-sm-2 col-form-label">Summary</label>
+            <div class="col-sm-6">
+                <textarea class="form-control" rows="6" name="summary"></textarea>
+            </div>
+    </div>
+    <div class="form-group row">
+            <label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" name="isbn">
+            </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary">Add Book</button>
+            <a class="btn btn-secondary ml-3" href="{{url_for('home')}}">Cancel</a>
+        </div>
+    </div>
+</form>
+{% endblock %}
